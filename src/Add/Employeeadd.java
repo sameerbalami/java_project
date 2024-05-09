@@ -4,6 +4,9 @@
  */
 package Add;
 
+import java.sql.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lenovo
@@ -13,6 +16,8 @@ public class Employeeadd extends javax.swing.JFrame {
     /**
      * Creates new form Employeeadd
      */
+    
+    String gender;
     public Employeeadd() {
         initComponents();
     }
@@ -46,16 +51,16 @@ public class Employeeadd extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        joiningtxt = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         addresstxt = new javax.swing.JTextField();
         save_btn = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        male = new javax.swing.JRadioButton();
+        female = new javax.swing.JRadioButton();
+        other = new javax.swing.JRadioButton();
         dobtxt = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
         salarytxt = new javax.swing.JTextField();
+        dateOfJointxt = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,17 +142,32 @@ public class Employeeadd extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jRadioButton1.setText("Male");
+        buttonGroup1.add(male);
+        male.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        male.setText("Male");
+        male.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maleActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jRadioButton2.setText("Female");
+        buttonGroup1.add(female);
+        female.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        female.setText("Female");
+        female.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                femaleActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jRadioButton3.setText("Other");
+        buttonGroup1.add(other);
+        other.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        other.setText("Other");
+        other.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                otherActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Salary");
@@ -185,21 +205,21 @@ public class Employeeadd extends javax.swing.JFrame {
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(citytxt, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                                             .addComponent(countrytxt, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                                            .addComponent(joiningtxt, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(dateOfJointxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(0, 29, Short.MAX_VALUE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(emailidtxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                                .addComponent(jRadioButton1)
+                                                .addComponent(male)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jRadioButton2)
+                                                .addComponent(female)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jRadioButton3))
+                                                .addComponent(other))
                                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -222,9 +242,9 @@ public class Employeeadd extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
+                    .addComponent(male)
+                    .addComponent(female)
+                    .addComponent(other))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -257,8 +277,8 @@ public class Employeeadd extends javax.swing.JFrame {
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(joiningtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addresstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addresstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateOfJointxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -297,11 +317,78 @@ public class Employeeadd extends javax.swing.JFrame {
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
         // TODO add your handling code here:
+        try {
+             String sql="INSERT INTO `employee`(`Name`, `Department`, `Mobile`, `D.O.B`, `Address`, `Salary`, `Gender`, `Email_id`, `Country`, `City`, `D.O.J`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+             Class.forName("com.mysql.cj.jdbc.Driver");
+             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root","");
+             
+            PreparedStatement ps = conn.prepareStatement(sql);
+            
+
+            ps.setString(1, nametxt.getText());
+            ps.setString(2, departmenttxt.getSelectedItem().toString());
+            ps.setString(3, mobiletxt.getText());
+            ps.setString(4, dobtxt.getDate().toString());
+            ps.setString(5, addresstxt.getText());
+            ps.setString(6, salarytxt.getText());
+            ps.setString(7, gender);
+            ps.setString(8, emailidtxt.getText());
+            ps.setString(9, countrytxt.getText());
+            ps.setString(10, citytxt.getText());
+            ps.setString(11, dateOfJointxt.getDate().toString()); 
+            
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "Data stored successfully");
+            } else {
+                    JOptionPane.showMessageDialog(null, "Failed to store data");
+                }
+            nametxt.setText("");
+            departmenttxt.setSelectedItem(null); 
+            mobiletxt.setText("");
+            addresstxt.setText("");
+            salarytxt.setText("");
+            buttonGroup1.clearSelection();
+            other.setText("");
+            emailidtxt.setText("");
+            countrytxt.setText("");
+            citytxt.setText("");
+            dobtxt.setDate(null);
+            dateOfJointxt.setDate(null);
+            
+            conn.close();
+        } catch (Exception e) {
+            System.out.println("error--->"+e.getMessage());
+        }
     }//GEN-LAST:event_save_btnActionPerformed
 
     private void salarytxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salarytxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_salarytxtActionPerformed
+
+    private void maleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleActionPerformed
+        // TODO add your handling code here:
+        gender="male";
+        male.setSelected(true);
+        female.setSelected(false);
+        other.setSelected(false);
+    }//GEN-LAST:event_maleActionPerformed
+
+    private void femaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femaleActionPerformed
+        // TODO add your handling code here:
+        gender="female";
+        male.setSelected(false);
+        female.setSelected(true);
+        other.setSelected(false);
+    }//GEN-LAST:event_femaleActionPerformed
+
+    private void otherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_otherActionPerformed
+        // TODO add your handling code here:
+        gender="other";
+        male.setSelected(false);
+        female.setSelected(false);
+        other.setSelected(true);
+    }//GEN-LAST:event_otherActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,9 +430,11 @@ public class Employeeadd extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField citytxt;
     private javax.swing.JTextField countrytxt;
+    private com.toedter.calendar.JDateChooser dateOfJointxt;
     private javax.swing.JComboBox<String> departmenttxt;
     private com.toedter.calendar.JDateChooser dobtxt;
     private javax.swing.JTextField emailidtxt;
+    private javax.swing.JRadioButton female;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -361,12 +450,10 @@ public class Employeeadd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JTextField joiningtxt;
+    private javax.swing.JRadioButton male;
     private javax.swing.JTextField mobiletxt;
     private javax.swing.JTextField nametxt;
+    private javax.swing.JRadioButton other;
     private javax.swing.JTextField salarytxt;
     private javax.swing.JButton save_btn;
     // End of variables declaration//GEN-END:variables

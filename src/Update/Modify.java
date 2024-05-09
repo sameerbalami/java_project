@@ -4,6 +4,16 @@
  */
 package Update;
 
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import javax.swing.table.DefaultTableModel;
+import java.util.Vector;
+
+
+
 /**
  *
  * @author Lenovo
@@ -13,8 +23,49 @@ public class Modify extends javax.swing.JFrame {
     /**
      * Creates new form Modify
      */
+    
+     Connection conn=null;
+     PreparedStatement pstmt=null;
+     ResultSet rs = null;
+     
+    
     public Modify() {
         initComponents();
+        
+        try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root","");
+                pstmt = conn.prepareStatement("SELECT * FROM employee");
+                rs = pstmt.executeQuery();
+                
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int n = rsmd.getColumnCount();
+                
+                DefaultTableModel dtm =(DefaultTableModel) emp_table.getModel();
+                dtm.setRowCount(0);
+                while(rs.next()){
+                Vector v = new Vector();
+                for(int i = 1; i<=n; i++){
+                v.add(rs.getString("Emp_id"));
+                v.add(rs.getString("Name"));
+                v.add(rs.getString("Gender"));
+                v.add(rs.getString("Department"));
+                v.add(rs.getString("Email_id"));
+                v.add(rs.getString("Mobile"));
+                v.add(rs.getString("D.O.B"));
+                v.add(rs.getString("Address"));
+                v.add(rs.getString("Salary"));
+                
+                }
+                    dtm.addRow(v);
+                }
+            
+        } catch (Exception e) {
+            System.out.println("error--->"+e.getMessage());
+        }
+        
+        
+        
     }
 
     /**
@@ -31,7 +82,7 @@ public class Modify extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        emp_table = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,9 +90,9 @@ public class Modify extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Modify Employee");
+        jLabel1.setText("View");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-button.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eye.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -51,8 +102,8 @@ public class Modify extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(362, 362, 362))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(473, 473, 473))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,16 +120,21 @@ public class Modify extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(218, 228, 230));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        emp_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Emp-id", "Full Name", "Gender", "Department", "Emailid", "Mobile no"
+                "Emp-id", "Full Name", "Gender", "Department", "Emailid", "Mobile no", "D.O.B", "Address", "Salary"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        emp_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                emp_tableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(emp_table);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -116,6 +172,11 @@ public class Modify extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void emp_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emp_tableMouseClicked
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_emp_tableMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -152,11 +213,11 @@ public class Modify extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable emp_table;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

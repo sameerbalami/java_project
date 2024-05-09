@@ -138,6 +138,11 @@ public class Admin extends javax.swing.JFrame {
         jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 40, -1));
 
         view_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eye.png"))); // NOI18N
+        view_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                view_btnActionPerformed(evt);
+            }
+        });
         jPanel7.add(view_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 100));
 
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -212,9 +217,6 @@ public class Admin extends javax.swing.JFrame {
 
     private void modify_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modify_btnActionPerformed
         // TODO add your handling code here:
-        Modify modify = new Modify();
-        modify.setVisible(true);
-        dispose();
     }//GEN-LAST:event_modify_btnActionPerformed
 
     private void delete_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_btnActionPerformed
@@ -223,6 +225,13 @@ public class Admin extends javax.swing.JFrame {
         deletee.setVisible(true);
         dispose();
     }//GEN-LAST:event_delete_btnActionPerformed
+
+    private void view_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_btnActionPerformed
+        // TODO add your handling code here:
+            Modify modify = new Modify();
+            modify.setVisible(true);
+            dispose();
+    }//GEN-LAST:event_view_btnActionPerformed
 
     /**
      * @param args the command line arguments
