@@ -32,6 +32,7 @@ public class Employeeadd extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        nametxt1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -453,6 +454,7 @@ public class Employeeadd extends javax.swing.JFrame {
     private javax.swing.JRadioButton male;
     private javax.swing.JTextField mobiletxt;
     private javax.swing.JTextField nametxt;
+    private javax.swing.JTextField nametxt1;
     private javax.swing.JRadioButton other;
     private javax.swing.JTextField salarytxt;
     private javax.swing.JButton save_btn;
